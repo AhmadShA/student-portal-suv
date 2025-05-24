@@ -11,7 +11,7 @@ csrf = CSRFProtect()
 def create_app():
     app = Flask(__name__)
     app.secret_key = 'your-secret-key-here'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:0000@127.0.0.1:3306/student_portal'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:0000@localhost/student_portal'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize extensions
