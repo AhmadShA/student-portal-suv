@@ -5,3 +5,4 @@ mysql-connector-python==8.0.33
 humanize==4.7.0
 Flask-WTF==1.2.1
 python-dotenv==1.0.0
+gunicorn
