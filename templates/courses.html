@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Course Catalog</h2>
+    <div class="alert alert-info" id="enroll-status" style="display: none;"></div>
+    <div id="courses-list" class="row"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Get CSRF token from meta tag
+    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+    // Load courses
+    $.get('/api/courses', function(data) {
+        data.forEach(function(course) {
+            $('#courses-list').append(`
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${course.title}</h5>
+                            <p class="card-text">${course.description}</p>
+                            <button class="btn btn-primary enroll-btn" 
+                                    data-course-id="${course.id}">
+                                Enroll
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `);
+        });
+
+        // Handle enrollment clicks
+        $(document).on('click', '.enroll-btn', function() {
+            const courseId = $(this).data('course-id');
+            const $btn = $(this);
+            
+            $btn.prop('disabled', true).html(`
+                <span class="spinner-border spinner-border-sm"></span>
+                Enrolling...
+            `);
+
+            $.ajax({
+                url: '/ajax/enroll',
+                method: 'POST',
+                contentType: 'application/json',
+                headers: {
+                    'X-CSRFToken': csrfToken  // Add CSRF token
+                },
+                data: JSON.stringify({ 
+                    course_id: courseId 
+                }),
+                success: function(response) {
+                    if(response.success) {
+                        $btn.html('Enrolled').prop('disabled', true);
+                    } else {
+                        $btn.html('Enroll').prop('disabled', false);
+                        alert(response.error);
+                    }
+                },
+                error: function(xhr) {
+                    $btn.html('Enroll').prop('disabled', false);
+                    alert('Error: ' + (xhr.responseJSON?.error || 'Server error'));
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,82 @@
+/* Dark Theme Variables */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #212529;
+    --card-bg: #f8f9fa;
+    --border-color: #dee2e6;
+}
+
+.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #f8f9fa;
+    --card-bg: #2d2d2d;
+    --border-color: #444444;
+    --text-muted: #9fa6b2;
+}
+
+.dark-mode .text-muted {
+    color: var(--text-muted) !important;
+}
+
+.dark-mode .card-text {
+    color: var(--text-color);
+}
+
+.dark-mode .alert-info {
+    background-color: #08415c;
+    border-color: #06374e;
+    color: #c6e4f6;
+}
+
+.dark-mode .alert-link {
+    color: #7fd3ff;
+}
+
+/* Fix badge text */
+.dark-mode .badge.bg-primary {
+    color: white !important;
+}
+
+/* Fix timestamp text */
+.dark-mode small {
+    color: var(--text-muted);
+}
+
+/* Apply Theme */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+/* Navbar Dark Mode */
+.dark-mode .navbar-dark {
+    background-color: #000 !important;
+}
+
+/* Button Adjustments */
+.dark-mode .btn-outline-primary {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.dark-mode .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Enrollment Status Card */
+.dark-mode .list-group-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.dark-mode .badge.bg-primary {
+    background-color: #0d6efd !important;
+}

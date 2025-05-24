@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger">
+        <h4 class="alert-heading">Error!</h4>
+        <p>{{ error }}</p>
+        <hr>
+        <a href="/" class="btn btn-outline-secondary">Return to Home</a>
+    </div>
+</div>
+{% endblock %}
